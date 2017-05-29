@@ -2,6 +2,7 @@
     <deployment>
         <dependencies>
             <module name="deployment.mylib.jar" />
+            <module name="com.muhardin.endy.belajar.ejb.konfigurasi" />
         </dependencies>
     </deployment>
 </jboss-deployment-structure>
