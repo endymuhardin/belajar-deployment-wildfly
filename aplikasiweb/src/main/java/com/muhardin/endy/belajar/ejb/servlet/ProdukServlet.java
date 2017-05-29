@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.util.Properties;
 
 public class ProdukServlet extends HttpServlet {
+    private String namaFile = "aplikasi.properties";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Produk p = new Produk();
@@ -30,5 +34,19 @@ public class ProdukServlet extends HttpServlet {
         output.println("Harga Produk : "+p.getHarga()+"<br>");
         output.println("</body>");
         output.println("</html>");
+
+        loadProperties();
+    }
+
+    private void loadProperties(){
+        URL url = Thread.currentThread().getContextClassLoader().getResource(namaFile);
+        Properties props = new Properties();
+        try {
+            props.load(url.openStream());
+            String appName = props.getProperty("app.name");
+            System.out.println("Application Name : "+appName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
